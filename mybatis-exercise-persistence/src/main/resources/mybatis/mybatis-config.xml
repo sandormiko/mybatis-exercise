@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="mybatis.exercise.persistence.domain.User" alias="User"/>
+        <typeAlias type="mybatis.exercise.persistence.domain.Territory" alias="Territory"/>
+        <typeAlias type="mybatis.exercise.persistence.domain.CouponRegistration" alias="CouponRegistration"/>
+        <typeAlias type="mybatis.exercise.persistence.domain.CouponRegistrationCount" alias="CouponRegistrationCount"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="mybatis/mappers/UserMapper.xml" />
+		<mapper resource="mybatis/mappers/CouponRegistrationMapper.xml" />
+		<mapper resource="mybatis/mappers/CouponRegistrationCountMapper.xml" />
+		<mapper resource="mybatis/mappers/TerritoryMapper.xml" />
+	</mappers>
+</configuration>

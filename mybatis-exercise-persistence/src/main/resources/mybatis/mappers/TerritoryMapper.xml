@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.exercise.persistence.mapper.TerritoryMapper">
+	
+	<resultMap id="territoryMap" type="Territory" >
+		<id column="territory_id" property="territoryId"  />
+		<result column="country_name" property="countryName" />
+		<result column="nr_balls_per_day" property="nrOfBallsPerDay" />
+		<result column="nr_balls_per_campaign" property="nrOfBallsPerCampaign" />
+		<result column="vinning_rate" property="vinningRate" />
+	</resultMap>   
+ 
+	<select id="getTerritoryById" resultMap="territoryMap" parameterType='int'>
+		SELECT
+			TERRITORY_ID,
+			COUNTRY_NAME,
+			NR_BALLS_PER_DAY,
+			NR_BALLS_PER_CAMPAIGN,
+			VINNING_RATE
+		FROM TERRITORIES
+		where TERRITORY_ID= #{territoryId}
+	</select>
+	
+</mapper>

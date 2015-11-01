@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.exercise.persistence.mapper.UserMapper">
+	<!--    result maps     -->
+	<resultMap id="usersMap" type="User" >
+		<id column="user_id" property="userId"  />
+		<result column="first_name" property="firstName" />
+		<result column="last_name" property="lastName" />
+		<result column="email_address" property="emailAddress" />
+		<result column="birth_date" property="birthDate" />
+	</resultMap>   
+ 
+	<select id="getUserByEmailAddress" resultMap="usersMap" parameterType="java.lang.String">
+		SELECT
+			USER_ID,
+			FIRST_NAME,
+			LAST_NAME,
+			EMAIL_ADDRESS,
+			BIRTH_DATE
+		FROM USERS
+		where EMAIL_ADDRESS = #{emailAddress}
+	</select>
+	
+	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
+	    INSERT INTO USERS (
+	    FIRST_NAME,
+	    LAST_NAME,
+	    EMAIL_ADDRESS,
+	    BIRTH_DATE)
+	    VALUES (
+	    #{firstName}, #{lastName}, #{emailAddress},#{birthDate})
+  </insert>
+  
+</mapper>
