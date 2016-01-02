@@ -19,10 +19,23 @@
 	    USER_ID,
 	    TERRITORY_ID,
 	    WINNER,
-	    SUBMISSION_TS)
+	    SUBMISSION_TS,
+	    CRE_TS,
+	    MOD_TS,
+	    VERSION)
 	    VALUES (
-	    #{couponCode}, #{user.userId}, #{territory.territoryId},#{winner},#{submissionTs})
+	    #{couponCode}, #{user.userId}, #{territory.territoryId},#{winner},#{submissionTs},current_timestamp,current_timestamp,0)
   </insert>
+  
+  <update id="updateCouponRegistration" parameterType="CouponRegistration" >
+	    UPDATE coupon_registration (
+	    set 
+	    WINNER = #{winner},
+	    MOD_TS = current_timestamp,
+	    VERSION = VERSION +1)
+	    where registration_id = #{registrationId}
+	    and VERSION = VERSION;
+  </update>
   
   <select id="getCouponRegistrationByCouponCode" resultMap="registrationMap" parameterType="java.lang.String" >
 	    SELECT registration_id,

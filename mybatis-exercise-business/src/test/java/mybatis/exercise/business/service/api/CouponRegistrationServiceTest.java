@@ -1,4 +1,4 @@
-package mybatis.exercise.business.service.api.test;
+package mybatis.exercise.business.service.api;
 
 import mybatis.exercise.persistence.domain.CouponRegistration;
 import mybatis.exercise.persistence.domain.Territory;

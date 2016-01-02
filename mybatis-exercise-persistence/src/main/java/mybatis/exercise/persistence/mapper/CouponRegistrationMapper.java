@@ -6,4 +6,5 @@ public interface CouponRegistrationMapper{
 
 	public Integer insertCouponRegistration(CouponRegistration copunReg);
 	public CouponRegistration getCouponRegistrationByCouponCode(String couponCode);
+	public void updateCouponRegistration(CouponRegistration couponReg);
 }

@@ -28,9 +28,12 @@
 	    FIRST_NAME,
 	    LAST_NAME,
 	    EMAIL_ADDRESS,
-	    BIRTH_DATE)
+	    BIRTH_DATE,
+	    CRE_TS,
+	    MOD_TS,
+	    VERSION)
 	    VALUES (
-	    #{firstName}, #{lastName}, #{emailAddress},#{birthDate})
+	    #{firstName}, #{lastName}, #{emailAddress},#{birthDate},current_timestamp,current_timestamp,0)
   </insert>
   
 </mapper>

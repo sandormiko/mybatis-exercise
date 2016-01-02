@@ -1,4 +1,4 @@
-package mybatis.exerise.business.rule.validation.test;
+package mybatis.exercise.business.rule.validation;
 
 import mybatis.exercise.persistence.domain.User;
 

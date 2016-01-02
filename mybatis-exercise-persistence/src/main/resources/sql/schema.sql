@@ -4,6 +4,9 @@ CREATE TABLE users (
 	last_name VARCHAR(30) NOT NULL,
    	email_address VARCHAR(50) NOT NULL UNIQUE,
    	birth_date Date NOT NULL,
+	cre_ts TIMESTAMP NOT NULL,
+	mod_ts TIMESTAMP NOT NULL,
+	version INTEGER NOT NULL,
    	PRIMARY KEY (user_id)
 );
 
@@ -13,6 +16,9 @@ CREATE TABLE territories (
 	nr_balls_per_day INTEGER NOT NULL,
    	nr_balls_per_campaign  INTEGER NOT NULL,
    	vinning_rate INTEGER NOT null,
+	cre_ts TIMESTAMP NOT NULL,
+	mod_ts TIMESTAMP NOT NULL,
+	version INTEGER NOT NULL,
    	PRIMARY KEY (territory_id)
 );
 
@@ -23,6 +29,9 @@ CREATE TABLE coupon_registration (
    	user_id INTEGER NOT NULL,
    	territory_id  INTEGER NOT null,
    	submission_ts TIMESTAMP NOT NULL,
+	cre_ts TIMESTAMP NOT NULL,
+	mod_ts TIMESTAMP NOT NULL,
+	version INTEGER NOT NULL,
    	PRIMARY KEY (registration_id)
 );
 

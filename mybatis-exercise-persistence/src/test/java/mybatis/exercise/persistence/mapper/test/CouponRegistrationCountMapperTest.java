@@ -20,6 +20,6 @@ public class CouponRegistrationCountMapperTest extends PersistenceBaseTest{
 	@Test
 	public void testBetRegistrationCountByTerritory(){
 		Integer total = couponRegCountMapper.getRegistrationCountByTerritory(testCouponRegistration);
-		Assert.assertEquals((int)2, total.intValue());
+		Assert.assertEquals((int)3, total.intValue());
 	}
 }
