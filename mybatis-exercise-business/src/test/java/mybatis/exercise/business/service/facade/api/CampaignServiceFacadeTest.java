@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import mybatis.exercise.business.base.BusinessTestBase;
 import mybatis.exercise.business.constants.BusinessConsts;
 import mybatis.exercise.persistence.domain.CouponRegistration;
+import mybatis.exercise.persistence.mapper.test.PersistenceBaseTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:business-context.xml" })
-public class CampaignServiceFacadeTest extends BusinessTestBase{
+public class CampaignServiceFacadeTest extends PersistenceBaseTest{
 
 	@Autowired
 	private CampaignServiceFacade facade;

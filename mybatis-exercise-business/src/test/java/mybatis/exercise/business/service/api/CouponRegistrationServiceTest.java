@@ -9,15 +9,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import mybatis.exercise.business.base.BusinessTestBase;
 import mybatis.exercise.business.exception.InvalidCouponCodeException;
 import mybatis.exercise.persistence.domain.CouponRegistration;
+import mybatis.exercise.persistence.mapper.test.PersistenceBaseTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:business-context.xml" })
 @TransactionConfiguration(defaultRollback = true)
 @Transactional
-public class CouponRegistrationServiceTest extends BusinessTestBase{
+public class CouponRegistrationServiceTest extends PersistenceBaseTest{
 
 	@Autowired
 	private CouponRegistrationService couponRegService;

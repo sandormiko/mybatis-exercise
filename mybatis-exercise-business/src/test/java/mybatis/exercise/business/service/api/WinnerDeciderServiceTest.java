@@ -3,12 +3,12 @@ package mybatis.exercise.business.service.api;
 import org.junit.Assert;
 import org.junit.Test;
 
-import mybatis.exercise.business.base.BusinessTestBase;
 import mybatis.exercise.business.service.impl.WinnerDeciderServiceImpl;
 import mybatis.exercise.persistence.domain.CouponRegistration;
 import mybatis.exercise.persistence.mapper.CouponRegistrationCountMapper;
+import mybatis.exercise.persistence.mapper.test.PersistenceBaseTest;
 
-public class WinnerDeciderServiceTest extends BusinessTestBase{
+public class WinnerDeciderServiceTest extends PersistenceBaseTest{
 
 	@Test
 	public void testWinnerCouponSubmission() {

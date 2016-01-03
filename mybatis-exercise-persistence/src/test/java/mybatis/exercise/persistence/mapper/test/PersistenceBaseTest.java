@@ -1,43 +1,48 @@
 package mybatis.exercise.persistence.mapper.test;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 import mybatis.exercise.persistence.domain.CouponRegistration;
 import mybatis.exercise.persistence.domain.Territory;
 import mybatis.exercise.persistence.domain.User;
 
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:persistence-context.xml" })
-@TransactionConfiguration(defaultRollback = true)
-@Transactional
 public abstract class PersistenceBaseTest {
 
 	protected static final int ID_HUNGARY = 1000;
 	protected static final int ID_TEST_USER = 1000;
 	protected static final String TEST_COUPON_CODE = "12345678901po";
-
+	private static final int TEST_WINNING_RATE = 80;
+	protected static final String TEST_EMAIL_TO_SEARCH_FOR = "jakab@gipsz.hu";
+	protected static final String TEST_EMAIL = "test@gipsz.hu";
+	private static final String TEST_FIRSTNAME = "Jakab";
+	private static final String TEST_LASTNAME = "Gipsz";
+	
 	protected CouponRegistration prepareTestData() {
-		Territory territory = new Territory();
-		territory.setTerritoryId(ID_HUNGARY);
-		User user = new User();
-		user.setUserId(ID_TEST_USER);
-		return prepareTestCouponRegistration(territory, user);
+		CouponRegistration couponRegistration = new CouponRegistration();
+		User submittedBy = prepareTestUser();
+		couponRegistration.setUser(submittedBy);
+		Territory territory = prepareTerritory();
+		couponRegistration.setTerritory(territory);
+		couponRegistration.setCouponCode(TEST_COUPON_CODE);
+		couponRegistration.setSubmissionTs(LocalDate.now().toDate());
+		return couponRegistration;
 	}
 
-	private CouponRegistration prepareTestCouponRegistration(Territory territory, User user) {
-		CouponRegistration testCouponRegistration = new CouponRegistration();
-		testCouponRegistration.setTerritory(territory);
-		testCouponRegistration.setUser(user);
-		testCouponRegistration.setCouponCode(TEST_COUPON_CODE);
-		testCouponRegistration.setSubmissionTs(new Date());
-		testCouponRegistration.setRegistrationId(1003);
-		return testCouponRegistration;
+	private Territory prepareTerritory() {
+		Territory territory = new Territory();
+		territory.setTerritoryId(ID_HUNGARY);
+		territory.setVinningRate(TEST_WINNING_RATE);
+		return territory;
+	}
+
+	protected User prepareTestUser() {
+		User submittedBy = new User();
+		submittedBy.setEmailAddress(TEST_EMAIL);
+		submittedBy.setBirthDate(new LocalDate(1972, 01, 02).toDate());
+		submittedBy.setUserId(1000);
+		submittedBy.setFirstName(TEST_FIRSTNAME);
+		submittedBy.setLastName(TEST_LASTNAME);
+		return submittedBy;
 	}
 
 }
