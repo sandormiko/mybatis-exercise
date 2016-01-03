@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.exercise.persistence.mapper.DailyStatisticMapper">
+	<resultMap id="dailyStatisticMap" type="DailyStatistic" >
+		<id column="daily_statistic_id" property="dailyStatisticId"  />
+		<result column="statistic_day" property="statisticDay" />
+		<result column="daily_count" property="dailyCount" />
+		<result column="version" property="version" />
+	</resultMap>   
+ 
+	<select id="findDailyStatisticByStatisticDay" resultMap="dailyStatisticMap" parameterType="java.lang.String">
+		select
+			daily_statistic_id,
+			statistic_day,
+			daily_count,
+			version
+		from daily_statistics
+		where statistic_day= #{statisticDay}
+	</select>
+	
+	<insert id="insertDailyStatistic" parameterType="DailyStatistic" useGeneratedKeys="true" keyProperty="dailyStatisticId" keyColumn="daily_statistic_id">
+	    insert into daily_statistics (
+	    statistic_day,
+	    daily_count,
+	    cre_ts,
+	    mod_ts,
+	    version)
+	    values (
+	    #{statisticDay}, #{dailyCount},current_timestamp,current_timestamp,#{version})
+  </insert>
+  
+  <update id="updateDailyStatistic" parameterType="hashmap">
+	    update daily_statistics
+	    set daily_count = #{dailyStat.dailyCount},
+	    version = #{dailyStat.version},
+	    mod_ts = current_timestamp
+	    where daily_statistic_id = #{dailyStat.dailyStatisticId}
+	    and version = #{version}
+  </update>
+</mapper>

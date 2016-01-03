@@ -9,11 +9,13 @@
         <typeAlias type="mybatis.exercise.persistence.domain.Territory" alias="Territory"/>
         <typeAlias type="mybatis.exercise.persistence.domain.CouponRegistration" alias="CouponRegistration"/>
         <typeAlias type="mybatis.exercise.persistence.domain.CouponRegistrationCount" alias="CouponRegistrationCount"/>
+        <typeAlias type="mybatis.exercise.persistence.domain.DailyStatistic" alias="DailyStatistic"/>
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/mappers/UserMapper.xml" />
 		<mapper resource="mybatis/mappers/CouponRegistrationMapper.xml" />
 		<mapper resource="mybatis/mappers/CouponRegistrationCountMapper.xml" />
 		<mapper resource="mybatis/mappers/TerritoryMapper.xml" />
+		<mapper resource="mybatis/mappers/DailyStatisticMapper.xml" />
 	</mappers>
 </configuration>
