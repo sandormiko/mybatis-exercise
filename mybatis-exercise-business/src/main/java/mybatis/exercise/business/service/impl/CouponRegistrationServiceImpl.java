@@ -29,10 +29,11 @@ public class CouponRegistrationServiceImpl implements CouponRegistrationService 
 	}
 
 	@Transactional
-	public void registerCoupon(CouponRegistration couponReg) {
+	public CouponRegistration registerCoupon(CouponRegistration couponReg) {
 		validateCouponRegistration(couponReg.getCouponCode());
 		setBusinessFields(couponReg);
 		couponRegMapper.insertCouponRegistration(couponReg);
+		return couponReg;
 	}
 
 	private void setBusinessFields(CouponRegistration couponReg) {
@@ -43,7 +44,7 @@ public class CouponRegistrationServiceImpl implements CouponRegistrationService 
 
 	private void validateCouponRegistration(String couponCode) {
 		couponCodeValidator.validate(couponCode);
-		CouponRegistration couponReqWithSameCode = couponRegMapper.getCouponRegistrationByCouponCode(couponCode);
+		CouponRegistration couponReqWithSameCode = couponRegMapper.findByCouponCode(couponCode);
 		if (couponReqWithSameCode != null) {
 			throw new InvalidCouponCodeException("Coupon code is already registered");
 		}

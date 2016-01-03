@@ -1,68 +1,42 @@
 package mybatis.exercise.business.service.api;
 
-import mybatis.exercise.persistence.domain.CouponRegistration;
-import mybatis.exercise.persistence.domain.Territory;
-import mybatis.exercise.persistence.mapper.CouponRegistrationCountMapper;
-import mybatis.exercise.persistence.mapper.TerritoryMapper;
-import mybatis.exercise.business.service.api.WinnerDeciderService;
-import mybatis.exercise.business.service.impl.WinnerDeciderServiceImpl;
-
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WinnerDeciderServiceTest {
+import mybatis.exercise.business.base.BusinessTestBase;
+import mybatis.exercise.business.service.impl.WinnerDeciderServiceImpl;
+import mybatis.exercise.persistence.domain.CouponRegistration;
+import mybatis.exercise.persistence.mapper.CouponRegistrationCountMapper;
 
-	private static CouponRegistration couponRegistration;
-	
-	@BeforeClass
-	public static void init(){
-		Territory territory = new Territory();
-		couponRegistration = new CouponRegistration();
-		couponRegistration.setTerritory(territory);
-	}
-	
+public class WinnerDeciderServiceTest extends BusinessTestBase{
+
 	@Test
-	public void testWinnerCouponSubmission(){
+	public void testWinnerCouponSubmission() {
 		int vinningRate = 80;
-		int nrTotalSubmissions = 159;
+		int nrTotalSubmissions = 160;
 		WinnerDeciderService deciderService = prepareDeciderService(vinningRate, nrTotalSubmissions);
-		boolean isWinner = deciderService.isWinnerCouponSubmission(couponRegistration);
-		Assert.assertTrue("This is a winner submission",isWinner);
+		boolean isWinner = deciderService.isWinnerCouponSubmission(prepareTestData());
+		Assert.assertTrue("This is a winner submission", isWinner);
 	}
-	
+
 	@Test
-	public void testNotWinnerCouponSubmission(){
+	public void testNotWinnerCouponSubmission() {
 		int vinningRate = 80;
 		int nrTotalSubmissions = 161;
 		WinnerDeciderService deciderService = prepareDeciderService(vinningRate, nrTotalSubmissions);
-		boolean isWinner = deciderService.isWinnerCouponSubmission(couponRegistration);
-		Assert.assertFalse("This is not a winner submission",isWinner);
+		boolean isWinner = deciderService.isWinnerCouponSubmission(prepareTestData());
+		Assert.assertFalse("This is not a winner submission", isWinner);
 	}
-	
-	public WinnerDeciderService prepareDeciderService(int vinningRate, int nrTotalSubmissions){
-		TerritoryMapper mockTerritoryMapper = getMockTerritoryMapper(vinningRate);
+
+	public WinnerDeciderService prepareDeciderService(int vinningRate, int nrTotalSubmissions) {
 		CouponRegistrationCountMapper mockRegCountMapper = getMockCouponRegistrationCountMapper(nrTotalSubmissions);
-		return new WinnerDeciderServiceImpl(mockTerritoryMapper, mockRegCountMapper);
+		return new WinnerDeciderServiceImpl(mockRegCountMapper);
 	};
-	
-	private static TerritoryMapper getMockTerritoryMapper(final int vinningRate){
-		TerritoryMapper mockMapper = new TerritoryMapper() {
+
+	private static CouponRegistrationCountMapper getMockCouponRegistrationCountMapper(final int nrSubmittedCoupons) {
+		CouponRegistrationCountMapper mockMapper = new CouponRegistrationCountMapper() {
 			@Override
-			public Territory getTerritoryById(Integer territoryId) {
-				Territory testTerritory = new Territory();
-				testTerritory.setVinningRate(vinningRate);
-				return testTerritory;
-			}
-		};
-		return mockMapper;
-	}
-	
-	private static CouponRegistrationCountMapper getMockCouponRegistrationCountMapper(final int nrSubmittedCoupons){
-		CouponRegistrationCountMapper mockMapper = new CouponRegistrationCountMapper(){
-			@Override
-			public Integer getRegistrationCountByTerritory(
-					CouponRegistration registration) {
+			public Integer getRegistrationCountByTerritory(CouponRegistration registration) {
 				return nrSubmittedCoupons;
 			}
 		};

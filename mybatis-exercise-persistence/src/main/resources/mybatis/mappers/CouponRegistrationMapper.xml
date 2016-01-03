@@ -9,6 +9,7 @@
 		<result column="coupon_code" property="couponCode" />
 		<result column="winner" property="winner" />
 		<result column="submission_ts" property="submissionTs" />
+		<result column="version" property="version" />
 		<association property="user" resultMap="mybatis.exercise.persistence.mapper.UserMapper.usersMap"/>
 		<association property="territory" resultMap="mybatis.exercise.persistence.mapper.TerritoryMapper.territoryMap"/>
 	</resultMap>
@@ -28,16 +29,16 @@
   </insert>
   
   <update id="updateCouponRegistration" parameterType="CouponRegistration" >
-	    UPDATE coupon_registration (
+	    UPDATE coupon_registration 
 	    set 
 	    WINNER = #{winner},
 	    MOD_TS = current_timestamp,
-	    VERSION = VERSION +1)
+	    VERSION = VERSION +1
 	    where registration_id = #{registrationId}
-	    and VERSION = VERSION;
+	    and VERSION = #{version};
   </update>
   
-  <select id="getCouponRegistrationByCouponCode" resultMap="registrationMap" parameterType="java.lang.String" >
+  <select id="findByCouponCode" resultMap="registrationMap" parameterType="java.lang.String" >
 	    SELECT registration_id,
 	    coupon_code,
 	    user_id,
@@ -55,6 +56,26 @@
 	    where c.territory_id = t.territory_id
 	    and u.user_id = c.user_id
 	    and coupon_code = #{couponCode}
+  </select>
+  
+  <select id="findByRegistrationId" resultMap="registrationMap" parameterType="java.lang.Integer" >
+	    SELECT registration_id,
+	    coupon_code,
+	    user_id,
+	    territory_id,
+	    winner,
+	    submission_ts,
+	    t.nr_balls_per_day,
+		t.nr_balls_per_campaign,
+		t.vinning_rate,
+		u.first_name,
+		u.last_name,
+		u.birth_date,
+		u.email_address
+	    from coupon_registration c, territories t, users u
+	    where c.territory_id = t.territory_id
+	    and u.user_id = c.user_id
+	    and registration_id = #{registrationId}
   </select>
   
 </mapper>

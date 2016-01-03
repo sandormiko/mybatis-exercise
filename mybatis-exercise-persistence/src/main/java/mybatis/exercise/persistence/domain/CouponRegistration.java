@@ -10,6 +10,8 @@ public class CouponRegistration {
 	private Territory territory;
 	private String winner;
 	private Date submissionTs;
+	private Integer version;
+	
 	public String getCouponCode() {
 		return couponCode;
 	}
@@ -64,6 +66,10 @@ public class CouponRegistration {
 				+ ", couponCode=" + couponCode + ", user=" + user
 				+ ", territory=" + territory + ", winner=" + winner
 				+ ", submissionTs=" + submissionTs + "]";
+	}
+
+	public Integer getVersion() {
+		return version;
 	}
 	
 }

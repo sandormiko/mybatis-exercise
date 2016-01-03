@@ -5,8 +5,8 @@
 <mapper namespace="mybatis.exercise.persistence.mapper.CouponRegistrationCountMapper">
 
   <select id="getRegistrationCountByTerritory" resultType="int" parameterType="CouponRegistration">
-        select count(registration_id) as total from coupon_registration
-		where submission_ts  &lt; #{submissionTs}
+        select count(registration_id) as value from coupon_registration
+		where registration_id  &lt;= #{registrationId}
 		and territory_id = #{territory.territoryId} 
 		group by territory_id
    </select>
