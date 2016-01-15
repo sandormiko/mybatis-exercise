@@ -24,7 +24,7 @@ public class CampaignServiceFacadeTest extends PersistenceBaseTest {
 	private CampaignServiceFacade facade;
 
 	@Autowired
-	private DailyStatisticService dsService = null;
+	private DailyStatisticService dsService;
 
 	@Test
 	public void testWholeCampaign() {
